@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 def save():
     global website_input, email_entry, password_entry
@@ -11,7 +12,9 @@ def save():
         #email_entry.delete(0, END)
         password_entry.delete(0, END)
 
-        psw_file.write(f"{website_input},{email_input},{password_input}\n")
+        is_ok = messagebox.askokcancel(title=f"website", message=f"These are the details added.\nWebsite: {website_input}\nEmail: {email_input}\nPassword: {password_input}\nOK to save?")
+        if (is_ok):
+            psw_file.write(f"{website_input},{email_input},{password_input}\n")
     return 1
 
 window = Tk()
