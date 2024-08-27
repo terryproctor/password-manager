@@ -2,12 +2,13 @@ from tkinter import *
 
 def save():
     global website_input, email_entry, password_entry
-    psw_file = open("saved_psw.csv", "a")
-    website_input = website_entry.get()
-    email_input = email_entry.get()
-    password_input = password_entry.get()
+    with open("saved_psw.csv", "a") as psw_file:
+        website_input = website_entry.get()
+        email_input = email_entry.get()
+        password_input = password_entry.get()
 
-    psw_file.write(f"{website_input},{email_input},{password_input}\n")
+        psw_file.write(f"{website_input},{email_input},{password_input}\n")
+    return 1
 
 window = Tk()
 window.title("Password Manager")
