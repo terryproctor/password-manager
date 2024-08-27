@@ -7,6 +7,10 @@ def save():
         email_input = email_entry.get()
         password_input = password_entry.get()
 
+        website_entry.delete(0, END)
+        #email_entry.delete(0, END)
+        password_entry.delete(0, END)
+
         psw_file.write(f"{website_input},{email_input},{password_input}\n")
     return 1
 
