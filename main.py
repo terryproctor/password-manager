@@ -1,5 +1,14 @@
 from tkinter import *
 
+def save():
+    global website_input, email_entry, password_entry
+    psw_file = open("saved_psw.csv", "a")
+    website_input = website_entry.get()
+    email_input = email_entry.get()
+    password_input = password_entry.get()
+
+    psw_file.write(f"{website_input},{email_input},{password_input}\n")
+
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
@@ -26,10 +35,12 @@ password_lb.grid(row=3, column=0)
 #Entries
 website_entry = Entry()
 website_entry.config(width=35)
+website_entry.focus()
 website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
 
 email_entry = Entry()
 email_entry.config(width=35)
+email_entry.insert(END, "example@email.com")
 email_entry.grid(row=2, column=1, columnspan=2, sticky="EW")
 
 password_entry = Entry()
@@ -41,9 +52,11 @@ generate_btn = Button()
 generate_btn.config(text="Generate Password")
 generate_btn.grid(row= 3, column=2, columnspan=1, sticky="EW")
 
-add_btn = Button()
+add_btn = Button(command=save)
 add_btn.config(text="Add", width=36)
 add_btn.grid(row= 4, column=1, columnspan=2, sticky="EW")
+
+
 
 
 window.mainloop()
