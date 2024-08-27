@@ -14,7 +14,10 @@ def save():
 
         is_ok = messagebox.askokcancel(title=f"website", message=f"These are the details added.\nWebsite: {website_input}\nEmail: {email_input}\nPassword: {password_input}\nOK to save?")
         if (is_ok):
-            psw_file.write(f"{website_input},{email_input},{password_input}\n")
+            if(len(website_input) and len(email_input) and len(password_input)):
+                psw_file.write(f"{website_input},{email_input},{password_input}\n")
+            else:
+                messagebox.showwarning(title="input error", message="Not enough information entered")
     return 1
 
 window = Tk()
