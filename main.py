@@ -50,12 +50,12 @@ password_lb.grid(row=3, column=0)
 
 #Entries
 website_entry = Entry()
-website_entry.config(width=35)
+website_entry.config(width=25)
 website_entry.focus()
 website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
 
 email_entry = Entry()
-email_entry.config(width=35)
+email_entry.config(width=25)
 email_entry.insert(END, "example@email.com")
 email_entry.grid(row=2, column=1, columnspan=2, sticky="EW")
 
