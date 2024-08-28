@@ -1,5 +1,6 @@
 #Password Generator Project
 import random
+import pyperclip
 
 def generate_password():
   letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -15,6 +16,8 @@ def generate_password():
   random.shuffle(password_list)
 
   password = "".join(password_list)
+  pyperclip.copy(password)
+  print(pyperclip.paste())
   return password
 
 # print(f"Your password is: {password}")
