@@ -17,7 +17,7 @@ def generate_password():
 
   password = "".join(password_list)
   pyperclip.copy(password)
-  print(pyperclip.paste())
+  #print(pyperclip.paste())
   return password
 
 # print(f"Your password is: {password}")
