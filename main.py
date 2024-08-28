@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from password_generator import generate_password
 
 def save():
     global website_input, email_entry, password_entry
@@ -19,6 +20,10 @@ def save():
             else:
                 messagebox.showwarning(title="input error", message="Not enough information entered")
     return 1
+
+def insert_gen_password():
+    password_entry.delete(0, END)
+    password_entry.insert(END, generate_password())
 
 window = Tk()
 window.title("Password Manager")
@@ -59,7 +64,7 @@ password_entry.config(width=21)
 password_entry.grid(row=3, column=1, columnspan=1, sticky="EW")
 
 #Buttons
-generate_btn = Button()
+generate_btn = Button(command=insert_gen_password)
 generate_btn.config(text="Generate Password")
 generate_btn.grid(row= 3, column=2, columnspan=1, sticky="EW")
 
