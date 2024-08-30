@@ -1,27 +1,49 @@
 from tkinter import *
 from tkinter import messagebox
 from password_generator import generate_password
-
-
-
+import json
 
 def save():
-    global website_input, email_entry, password_entry
-    with open("saved_psw.csv", "a") as psw_file:
-        website_input = website_entry.get()
-        email_input = email_entry.get()
-        password_input = password_entry.get()
+    global website, email_entry, password_entry
+    website = website_entry.get()
+    email= email_entry.get()
+    password= password_entry.get()
 
-        website_entry.delete(0, END)
-        #email_entry.delete(0, END)
-        password_entry.delete(0, END)
+    new_data = {
+        website: {
+            "email": email,
+            "password": password,
+        }
+    }
 
-        is_ok = messagebox.askokcancel(title=f"website", message=f"These are the details added.\nWebsite: {website_input}\nEmail: {email_input}\nPassword: {password_input}\nOK to save?")
-        if (is_ok):
-            if(len(website_input) and len(email_input) and len(password_input)):
-                psw_file.write(f"{website_input},{email_input},{password_input}\n")
-            else:
-                messagebox.showwarning(title="input error", message="Not enough information entered")
+    website_entry.delete(0, END)
+    #email_entry.delete(0, END)
+    password_entry.delete(0, END)
+
+    # is_ok = messagebox.askokcancel(title=f"website", message=f"These are the details added.\nWebsite: {website}\nEmail: {email_input}\nPassword: {password_input}\nOK to save?")
+    # if (is_ok):
+    if(len(website) == 0 or len(email) == 0 or len(password) == 0):
+        messagebox.showwarning(title="input error", message="Not enough information entered")
+    else:
+        #psw_file.write(f"{website},{email_input},{password_input}\n")
+        try:
+            with open("data.json", "r") as data_file:
+                #**Reading old data**
+                data = json.load(data_file)
+
+        except FileNotFoundError:
+            with open("data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            #**Updating old data**
+            data.update(new_data)
+
+            with open("data.json", "w") as data_file:
+                #**Saving Updated data**
+                json.dump(data, data_file, indent=4)
+        finally:
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
     return 1
 
 def insert_gen_password():
@@ -74,8 +96,5 @@ generate_btn.grid(row= 3, column=2, columnspan=1, sticky="EW")
 add_btn = Button(command=save)
 add_btn.config(text="Add", width=36)
 add_btn.grid(row= 4, column=1, columnspan=2, sticky="EW")
-
-
-
 
 window.mainloop()
