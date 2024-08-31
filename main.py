@@ -24,7 +24,6 @@ def save():
                 #**Reading old data**
                 data = json.load(data_file)
 
-
         except FileNotFoundError:
             with open("data.json", "w") as data_file:
                 json.dump(new_data, data_file, indent=4)
@@ -43,6 +42,23 @@ def save():
 def insert_gen_password():
     password_entry.delete(0, END)
     password_entry.insert(END, generate_password())
+
+def find_password():
+    website = website_entry.get()
+    
+    with open("data.json", "r") as data_file:
+                #**Reading old data**
+                data = json.load(data_file)
+                try:
+                    website_password = data[website]['password']
+                except KeyError:
+                    messagebox.showwarning(title="Website not found", message="No details for the website exists.")
+                else:
+                    messagebox.showinfo(title="Website password found", message=f"Website: {website}\nPassword: {website_password}") 
+
+    return 1           
+
+
     
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #UI
@@ -93,7 +109,7 @@ add_btn = Button(command=save)
 add_btn.config(text="Add", width=36)
 add_btn.grid(row= 4, column=1, columnspan=2, sticky="EW")
 
-search_btn = Button()
+search_btn = Button(command=find_password)
 search_btn.config(text="Search", width=21)
 search_btn.grid(row= 1, column=2, columnspan=1, sticky="EW")
 
