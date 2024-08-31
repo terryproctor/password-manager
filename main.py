@@ -16,20 +16,14 @@ def save():
         }
     }
 
-    website_entry.delete(0, END)
-    #email_entry.delete(0, END)
-    password_entry.delete(0, END)
-
-    # is_ok = messagebox.askokcancel(title=f"website", message=f"These are the details added.\nWebsite: {website}\nEmail: {email_input}\nPassword: {password_input}\nOK to save?")
-    # if (is_ok):
     if(len(website) == 0 or len(email) == 0 or len(password) == 0):
-        messagebox.showwarning(title="input error", message="Not enough information entered")
+        messagebox.showwarning(title="Input error", message="Not enough information entered")
     else:
-        #psw_file.write(f"{website},{email_input},{password_input}\n")
         try:
             with open("data.json", "r") as data_file:
                 #**Reading old data**
                 data = json.load(data_file)
+
 
         except FileNotFoundError:
             with open("data.json", "w") as data_file:
@@ -49,7 +43,9 @@ def save():
 def insert_gen_password():
     password_entry.delete(0, END)
     password_entry.insert(END, generate_password())
-
+    
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#UI
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
@@ -96,5 +92,9 @@ generate_btn.grid(row= 3, column=2, columnspan=1, sticky="EW")
 add_btn = Button(command=save)
 add_btn.config(text="Add", width=36)
 add_btn.grid(row= 4, column=1, columnspan=2, sticky="EW")
+
+search_btn = Button()
+search_btn.config(text="Search", width=21)
+search_btn.grid(row= 1, column=2, columnspan=1, sticky="EW")
 
 window.mainloop()
