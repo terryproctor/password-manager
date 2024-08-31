@@ -89,7 +89,7 @@ password_lb.grid(row=3, column=0)
 website_entry = Entry()
 website_entry.config(width=25)
 website_entry.focus()
-website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
+website_entry.grid(row=1, column=1, columnspan=1, sticky="EW")
 
 email_entry = Entry()
 email_entry.config(width=25)
