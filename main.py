@@ -53,8 +53,10 @@ def find_password():
                     website_password = data[website]['password']
                 except KeyError:
                     messagebox.showwarning(title="Website not found", message="No details for the website exists.")
+                except FileNotFoundError:
+                    messagebox.showwarning(title="No data stored yet", message="No website passwords have been stored yet.") 
                 else:
-                    messagebox.showinfo(title="Website password found", message=f"Website: {website}\nPassword: {website_password}") 
+                    messagebox.showinfo(title="Website password found", message=f"Website: {website}\nEmail: {data[website]['email']}\nPassword: {website_password}") 
 
     return 1           
 
